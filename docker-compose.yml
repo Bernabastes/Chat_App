@@ -1,0 +1,45 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: chat_app
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+
+  backend:
+    build: ./backend/server
+    working_dir: /app
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/chat_app?schema=public
+      REDIS_URL: redis://redis:6379
+      PORT: 3000
+      NODE_ENV: production
+    depends_on:
+      - db
+      - redis
+    ports:
+      - '3000:3000'
+
+  frontend:
+    build: ./frontend/client
+    working_dir: /app
+    environment:
+      VITE_BACKEND_URL: http://localhost:3000
+    ports:
+      - '5173:5173'
+
+volumes:
+  db_data:
+
+
+
