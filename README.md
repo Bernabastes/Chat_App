@@ -96,5 +96,6 @@ git push -u origin master
 - If running PM2 in containers, prefer one instance per container and scale via compose/k8s, or run PM2 cluster with Redis adapter (already configured).
 
 <img width="910" height="554" alt="image" src="https://github.com/user-attachments/assets/dd20ade8-32ab-46c5-966b-6c97aa2b5f8e" />
+<img width="898" height="513" alt="image" src="https://github.com/user-attachments/assets/c17d40fd-cc68-49f8-98af-23b1352ca034" />
 
 
